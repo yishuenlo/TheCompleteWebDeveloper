@@ -1,46 +1,35 @@
 let button = document.querySelector("#button");
 let userInput = document.querySelector("#userinput");
-let todoList = document.querySelector("#todo-list");
+let todoList = document.querySelector("#todo-list"); //grabs ul 
 let taskList = document.querySelectorAll("li");
 
-function updateTaskList() {
-  taskList = Array.from(document.querySelectorAll("li"));
-}
-
+//main interactivity of the list
+//add to list and assign listener to cross off the item
 button.addEventListener("click", function () {
-  //if there is user input AND no item doesn't already exist on the list
+  //if there is user input AND item doesn't already exist on the list
   if (userInput.value.length > 0 && checkDuplicates(userInput.value)) {
-    //capitalize first letter of every word for user input
-    //convert string into array
-    let input = userInput.value.split(" ");
+    //capitalize each word, store in array format
+    let input = capitalizeWords(userInput.value);
 
-    //loop through array to capitalize every word
-    for (let i = 0; i < input.length; i++) {
-      input[i] = input[i][0].toUpperCase() + input[i].slice(1);
-    }
+    //add to todo list
+    addToList(input);
 
-    //create new li node
-    let item = document.createElement("li");
-
-    //add text value to li
-    item.appendChild(document.createTextNode(input.join(" ")));
-
-    //append li to ul
-    todoList.appendChild(item);
-
+    //update tasklist array
     updateTaskList();
 
     //add event listener to new task
-    let newTask = taskList[taskList.length - 1];
-    newTask.addEventListener("click", function () {
-      newTask.classList.toggle("finished");
-    });
+    addNewEventListener(taskList);
+
+    //clear error border
+    userInput.classList.remove("error");
+
+    resetInputBox();
   } else {
-    console.log("please enter item name");
+    //add red outline if there is an error
+    userInput.classList.add("error");
+    console.log("item already on the list");
   }
 });
-
-function addToList() {}
 
 //assign event listener to list
 for (let list of taskList) {
@@ -49,12 +38,50 @@ for (let list of taskList) {
   });
 }
 
-//move finished task to the bottom
-for (let i = 0; i < taskList.length; i++) {
-  if (taskList[i].className == "finished") {
-    console.log(`${taskList[i].innerText} is finished`);
+updateTaskList();
+
+//----functions below----
+
+function updateTaskList() {
+  //convert nodes to array
+  taskList = Array.from(document.querySelectorAll("li"));
+}
+
+//capitalize first letter of every word for user input
+//takes string as input, output array
+function capitalizeWords(input) {
+  //convert string into array
+  input = input.split(" ");
+
+  //loop through array to capitalize every word
+  for (let i = 0; i < input.length; i++) {
+    input[i] = input[i][0].toUpperCase() + input[i].slice(1);
   }
-  // console.log(list.className);
+
+  return input; //in array format
+}
+
+//add li tag to todo list
+//takes array as input
+function addToList(task) {
+  //create new li node
+  let li = document.createElement("li");
+
+  //add text value to li
+  //convert array to string
+  li.appendChild(document.createTextNode(task.join(" ")));
+
+  return todoList.appendChild(li);
+}
+
+//add event listener to new task
+function addNewEventListener(list) {
+  //assign last task in the list array as new task
+  let newTask = list[list.length - 1];
+
+  return newTask.addEventListener("click", function () {
+    newTask.classList.toggle("finished");
+  });
 }
 
 function checkDuplicates(item) {
@@ -64,4 +91,6 @@ function checkDuplicates(item) {
   return true;
 }
 
-updateTaskList();
+function resetInputBox(){
+  return userInput.value = '';
+}

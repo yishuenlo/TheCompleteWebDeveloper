@@ -25,3 +25,7 @@ li {
   color:#ddd;
   text-decoration: line-through;
 }
+
+.error {
+  border: 1px solid red;
+}
