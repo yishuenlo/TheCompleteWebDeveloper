@@ -1,5 +1,11 @@
+:root{
+  --warning: crimson;
+}
+
+
 html {
   font-family: "fira-sans", sans-serif;
+  font-weight: 300;
   color: #333;
 }
 
@@ -10,15 +16,19 @@ body {
 }
 
 ul {
-    width: 50%;
+    width: 300px;
     /* margin: 0 auto; */
-    padding: 1em;
+    padding: 0;
 }
 
 li {
   cursor: pointer;
   /* background-color: red; */
-  padding: 0.25em 0;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  list-style: none;
+  border: 1px solid #666;
+  border-radius: 0.25rem;
 }
 
 .finished {
@@ -27,5 +37,21 @@ li {
 }
 
 .error {
-  border: 1px solid red;
+  border: 1px solid var(--warning);
+}
+
+.task {
+  margin: 0.5em;
+}
+
+.del {
+  cursor: pointer;
+  color: #ddd;
+  float: right;
+  background-color:white;
+  border: none;
+}
+
+.del:hover{
+  color: var(--warning);
 }
