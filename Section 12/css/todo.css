@@ -1,18 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300&display=swap');
+
 :root{
   --warning: crimson;
 }
 
 
 html {
-  font-family: "fira-sans", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   font-weight: 300;
   color: #333;
 }
 
 body {
     width: 90%;
-    margin: 0 auto;
+    margin: 10vh auto;
     /* text-align: center; */
+}
+
+div{
+  width: 300px;
+  margin: 0 auto;
 }
 
 ul {
@@ -23,12 +30,32 @@ ul {
 
 li {
   cursor: pointer;
-  /* background-color: red; */
+  /* background-color: #FAFAFA; */
   padding: 0.5em;
   margin: 0.5em 0;
   list-style: none;
   border: 1px solid #666;
   border-radius: 0.25rem;
+}
+
+input {
+  border: 1px solid #444;
+  width: 200px;
+  padding: 0.3em;
+}
+
+#button {
+  width: 85px;
+  cursor: pointer;
+  padding: 0.3em 1em;
+  border: 1px solid #444;
+  background-color: white;
+}
+
+#button:hover{
+  /* color: white; */
+  background-color: #FFD600;
+  transition: 400ms ease-in;
 }
 
 .finished {
@@ -54,4 +81,5 @@ li {
 
 .del:hover{
   color: var(--warning);
+  transition: 400ms ease-in;
 }
